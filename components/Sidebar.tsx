@@ -1,6 +1,10 @@
 // Components is a specific folder contained objects
 
 import Link from "next/link";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome, faInfoCircle, faCogs, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+
 
 // objects
 const Sidebar = () => {
@@ -17,7 +21,10 @@ const Sidebar = () => {
                 <div className="p-2 hover:bg-gray-700 rounded">Home</div>
               </Link>
               <Link href="/Explore">
-                <div className="p-2 hover:bg-gray-700 rounded">Explore</div>
+                <div className="p-2 hover:bg-gray-700 rounded">
+                  <FontAwesomeIcon icon={faBars} className="mr-2" />
+                  Explore
+                </div>
               </Link>
             </div>
           </div>
