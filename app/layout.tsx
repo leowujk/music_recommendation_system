@@ -17,7 +17,7 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
         <div className="flex flex-row">
           <Sidebar />
           {/* children means your pages */}
-          <div> {children} </div>
+          <div className="flex-grow"> {children} </div>
         </div>
       </body>
     </html>
