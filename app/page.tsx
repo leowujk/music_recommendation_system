@@ -21,7 +21,7 @@ export default function Home() {
       </div>
       <div className=" text-orange-700">
         {/*  */}
-        <ButtonGroups arr={buttons} />
+        <ButtonGroups arr={buttons}></ButtonGroups>
       </div>
 
     </div>
