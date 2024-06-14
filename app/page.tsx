@@ -1,6 +1,7 @@
 "use client"
 import Card, { CardGroup } from "@/components/Card";
 import Button, { ButtonGroups } from "@/components/Button";
+import Link from "next/link";
 import React from "react";
 
 export default function Home() {
@@ -20,10 +21,8 @@ export default function Home() {
         情境與類型
       </div>
       <div className=" text-orange-700">
-        {/*  */}
         <ButtonGroups arr={buttons}></ButtonGroups>
       </div>
-
     </div>
   );
 }

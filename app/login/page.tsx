@@ -6,10 +6,26 @@ export default function Login() {
   const [password, setPassword] = React.useState("");
   const [msg, setMsg] = React.useState("");
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     // 處理登入邏輯
     console.log(`Username: ${username}, Password: ${password}`);
     setMsg("Login attempt made!");
+    const post = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, password }),
+    };
+
+    try {
+      const res = await fetch("/api/login", post);
+      const json = await res.json();
+      console.log(json);
+      // Handle the response from the server
+    } catch (error) {
+      console.error('Error during login:', error);
+    }
   };
 
   return (

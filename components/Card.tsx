@@ -4,12 +4,11 @@ import Link from "next/link";
 interface CardProps {
     title: string;
     description: string;
-    buttonLink: string;
     buttonText: string;
 }
 
 //一張卡片
-const Card: React.FC<CardProps> = ({ title, description, buttonLink, buttonText }) => {
+const Card: React.FC<CardProps> = ({ title, description, buttonText }) => {
     return (
         <div className=" max-w-sm rounded-lg overflow-hidden shadow-lg bg-white transform transition duration-300 hover:scale-105">
             <div className=" px-6 pb-4">
@@ -17,7 +16,8 @@ const Card: React.FC<CardProps> = ({ title, description, buttonLink, buttonText 
                 <p className=" text-lime-950 text-base mb-4">{description}</p>
             </div>
             <div className=" px-6 pb-4">
-                <Link href="song-inform">
+                {/* 將title作為參數傳遞，而非網址 */}
+                <Link href={`/song-inform/${title}`}>
                     <div className=" inline-block bg-blue-500 hover:bg-blue-900 text-gray-100 font-bold px-4 py-2 rounded-full transition duration-300">
                         {buttonText}
                     </div>
@@ -36,7 +36,6 @@ export const CardGroup: React.FC<{ arr: string[] }> = ({ arr }) => {
                     <Card
                         title={item}
                         description={item + "description"}
-                        buttonLink={item + "buttonLink"}
                         buttonText={item + "buttonText"}
                     />
                 </div>
