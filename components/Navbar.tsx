@@ -1,6 +1,15 @@
+"use client"
 import Image from "next/image"
+import React, { useState } from 'react';
 
 const Navbar = () => {
+
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+
+  const toggleDropdown = () => {
+    setDropdownVisible(!dropdownVisible);
+  };
+
   return (
     <div className=" bg-cyan-900 p-4 flex justify-between items-center">
       <h1 className="text-2xl font-bold text-white">Music Recommendation System</h1>
@@ -14,8 +23,24 @@ const Navbar = () => {
           Search
         </button>
       </div>
-      <div className="flex items-center ml-auto">
-        <Image src="/user.png" className="w-16" width={256} height={256} alt="User Icon" />
+      <div className="flex items-center ml-auto relative">
+        <Image
+          src="/user.png"
+          className="w-16 cursor-pointer"
+          width={256}
+          height={256}
+          alt="User Icon"
+          onClick={toggleDropdown}
+        />
+        {dropdownVisible && (
+          <div className="absolute top-14 right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-20">
+            <ul className="py-1">
+              <li className="px-4 py-2 text-gray-800 hover:bg-gray-200 cursor-pointer">1</li>
+              <li className="px-4 py-2 text-gray-800 hover:bg-gray-200 cursor-pointer">2</li>
+              <li className="px-4 py-2 text-gray-800 hover:bg-gray-200 cursor-pointer">3</li>
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );
