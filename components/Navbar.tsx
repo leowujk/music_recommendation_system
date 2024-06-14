@@ -1,5 +1,6 @@
 "use client"
 import Image from "next/image"
+import Link from "next/link";
 import React, { useState } from 'react';
 
 const Navbar = () => {
@@ -35,9 +36,21 @@ const Navbar = () => {
         {dropdownVisible && (
           <div className="absolute top-14 right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-20">
             <ul className="py-1">
-              <li className="px-4 py-2 text-gray-800 hover:bg-gray-200 cursor-pointer">1</li>
-              <li className="px-4 py-2 text-gray-800 hover:bg-gray-200 cursor-pointer">2</li>
-              <li className="px-4 py-2 text-gray-800 hover:bg-gray-200 cursor-pointer">3</li>
+              <Link href="/login">
+                <li className="px-4 py-2 text-gray-800 hover:bg-gray-200 cursor-pointer font-bold">
+                  登入頁面
+                </li>
+              </Link>
+              <Link href="/register">
+                <li className="px-4 py-2 text-gray-800 hover:bg-gray-200 cursor-pointer font-bold">
+                  註冊頁面
+                </li>
+              </Link>
+              <Link href="/account">
+                <li className="px-4 py-2 text-gray-800 hover:bg-gray-200 cursor-pointer font-bold">
+                  修改帳號頁面
+                </li>
+              </Link>
             </ul>
           </div>
         )}

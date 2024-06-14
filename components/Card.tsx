@@ -17,7 +17,7 @@ const Card: React.FC<CardProps> = ({ title, description, buttonLink, buttonText 
                 <p className=" text-lime-950 text-base mb-4">{description}</p>
             </div>
             <div className=" px-6 pb-4">
-                <Link href={buttonLink}>
+                <Link href="song-inform">
                     <div className=" inline-block bg-blue-500 hover:bg-blue-900 text-gray-100 font-bold px-4 py-2 rounded-full transition duration-300">
                         {buttonText}
                     </div>
