@@ -1,6 +1,5 @@
 "use client"
 import React from 'react';
-import { useRouter } from 'next/router';
 
 const SongDetailPage: React.FC< { params: { slug: string } } >= ({ params }) => {
 

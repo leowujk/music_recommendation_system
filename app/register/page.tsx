@@ -1,19 +1,40 @@
-"use client"
-import React from "react";
+"use client";
+import React, { useState } from "react";
 
 export default function Register() {
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [confirmPassword, setConfirmPassword] = React.useState("");
-  const [age, setAge] = React.useState("");
-  const [gender, setGender] = React.useState("");
-  const [city, setCity] = React.useState("");
-  const [msg, setMsg] = React.useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [age, setAge] = useState("");
+  const [gender, setGender] = useState("");
+  const [city, setCity] = useState("");
+  const [msg, setMsg] = useState("");
 
-  const handleRegister = () => {
-    // 處理註冊邏輯
+  const handleRegister = async () => {
     console.log(`Username: ${username}, Password: ${password}, Confirm Password: ${confirmPassword}, Age: ${age}, Gender: ${gender}, City: ${city}`);
     setMsg("Register attempt made!");
+
+    const post = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, password, confirmPassword, age, gender, city }),
+    };
+
+    try {
+      const res = await fetch("/api/register", post);
+      if (res.ok) {
+        const json = await res.json();
+        console.log(json);
+        setMsg(`User ${json.username} registered successfully!`);
+      } else {
+        setMsg("Registration failed!");
+      }
+    } catch (error) {
+      console.error('Error during register:', error);
+      setMsg("An error occurred. Please try again.");
+    }
   };
 
   return (

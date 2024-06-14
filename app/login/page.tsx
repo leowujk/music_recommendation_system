@@ -18,6 +18,7 @@ export default function Login() {
       body: JSON.stringify({ username, password }),
     };
 
+  // this is important
     try {
       const res = await fetch("/api/login", post);
       const json = await res.json();
