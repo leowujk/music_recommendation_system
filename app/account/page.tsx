@@ -1,20 +1,41 @@
-"use client"
-import React from "react";
+"use client";
+import React, { useState } from "react";
 
 export default function AccountSettings() {
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [newPassword, setNewPassword] = React.useState("");
-  const [confirmNewPassword, setConfirmNewPassword] = React.useState("");
-  const [age, setAge] = React.useState("");
-  const [gender, setGender] = React.useState("");
-  const [city, setCity] = React.useState("");
-  const [msg, setMsg] = React.useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  const [age, setAge] = useState("");
+  const [gender, setGender] = useState("");
+  const [city, setCity] = useState("");
+  const [msg, setMsg] = useState("");
 
-  const handleUpdateAccount = () => {
-    // 處理更新帳號資訊的邏輯
+  const handleUpdateAccount = async () => {
     console.log(`Username: ${username}, Password: ${password}, New Password: ${newPassword}, Confirm New Password: ${confirmNewPassword}, Age: ${age}, Gender: ${gender}, City: ${city}`);
     setMsg("Account update attempt made!");
+
+    const post = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, password, newPassword, confirmNewPassword, age, gender, city }),
+    };
+
+    try {
+      const res = await fetch("/api/account_change", post);
+      if (res.ok) {
+        const json = await res.json();
+        console.log(json);
+        setMsg(`User ${json.username} updated successfully!`);
+      } else {
+        setMsg("Account update failed!");
+      }
+    } catch (error) {
+      console.error('Error during account change:', error);
+      setMsg("An error occurred. Please try again.");
+    }
   };
 
   return (
