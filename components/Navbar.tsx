@@ -2,13 +2,27 @@
 import Image from "next/image"
 import Link from "next/link";
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const Navbar = () => {
 
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  //search
+  const [searchQuery, setSearchQuery] = useState('');
+  const router = useRouter();
 
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
+  };
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const handleSearchSubmit = () => {
+    if (searchQuery.trim()) {
+      router.push(`/song-inform/${searchQuery}`);
+    }
   };
 
   return (
@@ -19,8 +33,12 @@ const Navbar = () => {
           type="text"
           placeholder="Search"
           className="px-4 py-2 rounded-md mr-2 bg-white text-gray-900"
+          //search
+          value={searchQuery}
+          onChange={handleSearchChange}
         />
-        <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-orange-600 hover:shadow-md transition duration-700">
+        {/* on onClick */}
+        <button onClick={handleSearchSubmit} className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-orange-600 hover:shadow-md transition duration-700">
           Search
         </button>
       </div>
