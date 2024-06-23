@@ -19,17 +19,17 @@ const Button: React.FC<ButtonProps> = ({Buttonhref, Name}) => {
 
 
 //一排按鈕
-export const ButtonGroups: React.FC<{arr: string[]}> = ({arr}) => {
-    return(
-        <div className="grid grid-cols-2 lg:grid-cols-4 items-center justify-end px-15 py-2">
-            {arr.map((item, index) => (
-                <div key={index} className=" p-2">
-                    <Button Buttonhref={item+"Name"} Name={item+"Name"} />                        
-                </div>
-            ))}
-        </div>
-    );
-}
+// export const ButtonGroups: React.FC<{arr: string[]}> = ({arr}) => {
+//     return(
+//         <div className="grid grid-cols-2 lg:grid-cols-4 items-center justify-end px-15 py-2">
+//             {arr.map((item, index) => (
+//                 <div key={index} className=" p-2">
+//                     <Button Buttonhref={item+"Name"} Name={item+"Name"} />                        
+//                 </div>
+//             ))}
+//         </div>
+//     );
+// }
 
 export default Button;
 

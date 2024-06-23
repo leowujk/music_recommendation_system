@@ -8,7 +8,7 @@ import { useSearchParams } from 'next/navigation';
 
 export default function Home() {
   const items = ["1", "2", "3", "4", "5", "6", "7", "8"];
-  const buttons = ["Button01", "Button02", "Button03", "Button04"]
+  // const buttons = ["Button01", "Button02", "Button03", "Button04"]
   const [msg, setMsg] = React.useState("");
   //search
   const searchParams = useSearchParams();
@@ -26,11 +26,14 @@ export default function Home() {
         <CardGroup arr={items} />
       </div>
       <div className="text-4xl p-8 font-bold text-pink-500">
-        情境與類型
+        電音
       </div>
-      <div className=" text-orange-700">
+      <div className="text-4xl p-8 font-bold text-pink-500">
+        抒情
+      </div>
+      {/* <div className=" text-orange-700">
         <ButtonGroups arr={buttons}></ButtonGroups>
-      </div>
+      </div> */}
     </div>
   );
 }

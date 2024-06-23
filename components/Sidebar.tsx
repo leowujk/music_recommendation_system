@@ -17,14 +17,6 @@ const Sidebar = () => {
             </div>
           </div>
         </Link>
-        <Link href="/explore">
-          <div className="p-2 hover:bg-gray-700 rounded flex items-center justify-between">
-            <span>Explore</span>
-            <div className="ml-2">
-              <Image src="/explore.png" width={24} height={24} alt="Explore Icon" />
-            </div>
-          </div>
-        </Link>
         <hr className=" mb-10 mt-5 border-yellow-400" />
         {/* link is to folder's name */}
         <Link href="/bookmarks-1">
