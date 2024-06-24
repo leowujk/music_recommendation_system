@@ -1,11 +1,18 @@
-"use client"
+"use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Sidebar = () => {
   const [showButtons, setShowButtons] = useState(false);
   const [collectionName, setCollectionName] = useState("收藏1"); // Initial collection name
+
+  useEffect(() => {
+    const storedName = localStorage.getItem('collectionName');
+    if (storedName) {
+      setCollectionName(storedName);
+    }
+  }, []);
 
   const handleMouseEnter = () => {
     setShowButtons(true);
@@ -15,17 +22,33 @@ const Sidebar = () => {
     setShowButtons(false);
   };
 
-  const handleRename = () => {
+  const handleRename = async () => {
     const newName = prompt("Enter new name:");
-    // Logic to update the name goes here
     if (newName) {
-      // Update the link or perform the necessary action
-      setCollectionName(newName); // Update the collection name
+      try {
+        const res = await fetch('/api/renameCollection', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ oldName: collectionName, newName }),
+        });
+        const data = await res.json();
+        console.log('Renamed:', data);
+        setCollectionName(newName); // Update the collection name
+        localStorage.setItem('collectionName', newName); // Save to local storage
+  
+        // Reload bookmarks-1 page after renaming
+        window.location.href = 'http://localhost:3000/bookmarks-1';
+  
+      } catch (error) {
+        console.error('Error renaming collection:', error);
+      }
     }
   };
+  
 
   const handleDelete = async () => {
-    // Logic to delete the page.tsx file goes here
     try {
       const res = await fetch('/api/deletePage', {
         method: 'DELETE',
@@ -38,6 +61,25 @@ const Sidebar = () => {
       console.log('Deleted:', data);
     } catch (error) {
       console.error('Error deleting page:', error);
+    }
+  };
+
+  const handleAddCollection = async () => {
+    const newCollectionName = prompt("Enter new collection name:");
+    if (newCollectionName) {
+      try {
+        const res = await fetch('/api/duplicatePage', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ newPageName: newCollectionName }),
+        });
+        const data = await res.json();
+        console.log('New collection added:', data);
+      } catch (error) {
+        console.error('Error adding collection:', error);
+      }
     }
   };
 
@@ -57,10 +99,14 @@ const Sidebar = () => {
           </div>
         </Link>
         <hr className="mb-10 mt-5 border-yellow-400" />
-        {/* link is to folder's name */}
+        <button
+          onClick={handleAddCollection}
+          className="p-2 mb-4 bg-blue-600 hover:bg-blue-700 rounded text-white"
+        >
+          新增收藏
+        </button>
         <div className="p-2 hover:bg-gray-700 rounded" style={{ position: 'relative' }}>
           <Link href="/bookmarks-1">
-            {/* rename, just put variable in. */}
             <span>{collectionName}</span>
           </Link>
           {showButtons && (
