@@ -1,6 +1,6 @@
 "use client"
 import Card, { CardGroup } from "@/components/Card";
-import Button, { ButtonGroups } from "@/components/Button";
+import Button from "@/components/Button";
 import Link from "next/link";
 import React from "react";
 //search
